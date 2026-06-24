@@ -1,0 +1,14 @@
+@if (report; as r) {
+  <div class="execution-report">
+    <h3>Last execution report</h3>
+    <div><strong>Requested:</strong> {{ join(r.requestedActions) }}</div>
+    <div><strong>Executed:</strong> {{ join(r.executedActions) }}</div>
+    <div><strong>Skipped:</strong> {{ join(r.skippedActions) }}</div>
+    <div><strong>Errors:</strong> {{ join(r.errors) }}</div>
+    <div><strong>Executed at:</strong> {{ r.executedAt }}</div>
+  </div>
+} @else {
+  <div class="execution-report empty">
+    Ingen execution report endnu.
+  </div>
+}

@@ -1,0 +1,36 @@
+<section class="status-bar">
+  <div class="status-item">
+    <span class="label">App mode</span>
+    <span class="value">{{ appMode ?? '-' }}</span>
+  </div>
+
+  <div class="status-item">
+    <span class="label">Antal sale</span>
+    <span class="value">{{ screenCount }}</span>
+  </div>
+
+  @if (loading) {
+    <div class="status-item">
+      <span class="value">Indlæser…</span>
+    </div>
+  }
+
+  @if (error; as err) {
+    <div class="status-item error">
+      <span class="value">{{ err }}</span>
+    </div>
+  }
+
+  <div class="mode-actions">
+    @for (mode of modes; track mode) {
+      <button
+        type="button"
+        class="mode-button"
+        [class.active]="isActive(mode)"
+        [disabled]="busy || isActive(mode)"
+        (click)="modeChange.emit(mode)">
+        {{ mode }}
+      </button>
+    }
+  </div>
+</section>

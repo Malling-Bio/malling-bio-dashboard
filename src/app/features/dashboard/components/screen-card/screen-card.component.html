@@ -1,0 +1,26 @@
+<article class="screen-card">
+  <div class="screen-card__header">
+    <h2>{{ screen.screenId }}</h2>
+    <app-screen-state-badge [state]="screen.runtime.supervisedState"></app-screen-state-badge>
+  </div>
+
+  <app-snapshot-panel [runtime]="screen.runtime"></app-snapshot-panel>
+
+  <app-door-reminder-panel [doorReminder]="screen.doorReminder"></app-door-reminder-panel>
+
+  <app-execution-report-panel [report]="screen.lastExecutionReport"></app-execution-report-panel>
+
+  <app-screen-actions-panel
+    [screenId]="screen.screenId"
+    [busy]="busy"
+    (sendEvent)="sendEvent.emit($event)"
+    (setSupervisorState)="setSupervisorState.emit($event)">
+  </app-screen-actions-panel>
+
+  <app-timing-plan-panel
+    [screenId]="screen.screenId"
+    [busy]="busy"
+    [timingPlan]="screen.runtime.timingPlan"
+    (setTimingPlan)="setTimingPlan.emit($event)">
+  </app-timing-plan-panel>
+</article>

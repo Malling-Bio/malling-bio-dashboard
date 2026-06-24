@@ -1,0 +1,15 @@
+.execution-report {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 16px;
+  font-size: 14px;
+
+  h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 16px;
+  }
+
+  &.empty {
+    color: #64748b;
+  }
+}

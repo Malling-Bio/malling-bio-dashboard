@@ -1,0 +1,29 @@
+.snapshot-panel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.field {
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  border-radius: 14px;
+  padding: 12px;
+
+  &.full-width {
+    grid-column: span 2;
+  }
+}
+
+.field-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.field-value {
+  font-weight: 600;
+  word-break: break-word;
+}

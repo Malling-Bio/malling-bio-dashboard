@@ -1,0 +1,28 @@
+<div class="snapshot-panel">
+  <div class="field">
+    <div class="field-label">IMS connectivity</div>
+    <div class="field-value">{{ runtime.snapshot.connectivity }}</div>
+  </div>
+
+  <div class="field">
+    <div class="field-label">IMS scheduler mode</div>
+    <div class="field-value">
+      {{ runtime.snapshot.schedulerRunning ? 'Running' : 'Stopped' }}
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="field-label">IMS current content</div>
+    <div class="field-value">{{ runtime.snapshot.currentContentTitle ?? '-' }}</div>
+  </div>
+
+  <div class="field">
+    <div class="field-label">IMS show status</div>
+    <div class="field-value">{{ runtime.snapshot.showStatus }}</div>
+  </div>
+
+  <div class="field full-width">
+    <div class="field-label">IMS updated</div>
+    <div class="field-value">{{ runtime.updatedAt }}</div>
+  </div>
+</div>

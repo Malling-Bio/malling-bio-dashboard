@@ -1,0 +1,31 @@
+<div class="dashboard-page">
+  <header class="page-header">
+    <div>
+      <h1>Malling Bio Dashboard</h1>
+      <p>Første Angular-version med rigtige backend-data.</p>
+    </div>
+  </header>
+
+  <app-app-mode-banner
+    [appMode]="appMode()"
+    [screenCount]="screens().length"
+    [loading]="loading()"
+    [busy]="busy()"
+    [error]="error()"
+    (modeChange)="changeAppMode($event)">
+  </app-app-mode-banner>
+
+  @if (!loading()) {
+    <section class="screen-list">
+      @for (screen of screens(); track screen.screenId) {
+        <app-screen-card
+          [screen]="screen"
+          [busy]="busy()"
+          (sendEvent)="sendScreenEvent($event)"
+          (setSupervisorState)="setSupervisorState($event)"
+          (setTimingPlan)="setTimingPlan($event)">
+        </app-screen-card>
+      }
+    </section>
+  }
+</div>

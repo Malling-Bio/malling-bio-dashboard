@@ -1,0 +1,46 @@
+.state-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 110px;
+  padding: 8px 14px;
+
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.state-badge.running {
+  background: #dcfce7;
+  color: #166534;
+  border-color: #86efac;
+}
+
+.state-badge.paused {
+  background: #fef3c7;
+  color: #92400e;
+  border-color: #fcd34d;
+}
+
+.state-badge.stopped {
+  background: #fee2e2;
+  color: #991b1b;
+  border-color: #fca5a5;
+}
+
+.state-badge.idle {
+  background: #e2e8f0;
+  color: #334155;
+  border-color: #cbd5e1;
+}
+
+.state-badge.unknown {
+  background: #f1f5f9;
+  color: #475569;
+  border-color: #cbd5e1;
+}

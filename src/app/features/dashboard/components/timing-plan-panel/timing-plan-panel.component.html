@@ -1,0 +1,69 @@
+<form class="timing-plan-panel" (ngSubmit)="onSubmit()">
+  <div class="panel-header">
+    <h3>Timing plan</h3>
+    @if (busy) {
+      <span class="busy-indicator">Submitting…</span>
+    }
+  </div>
+
+  <div class="field-grid">
+    <label class="field">
+      <span class="field-label">Intro start</span>
+      <input
+        type="datetime-local"
+        name="introStartLocal"
+        [(ngModel)]="introStartLocal"
+        [disabled]="busy"
+      />
+    </label>
+
+    <label class="field">
+      <span class="field-label">Public start</span>
+      <input
+        type="datetime-local"
+        name="publicStartLocal"
+        [(ngModel)]="publicStartLocal"
+        [disabled]="busy"
+      />
+    </label>
+
+    <label class="checkbox-field">
+      <input
+        type="checkbox"
+        name="autoStartEnabled"
+        [(ngModel)]="autoStartEnabled"
+        [disabled]="busy"
+      />
+      <span>Auto start enabled</span>
+    </label>
+  </div>
+
+  <button type="submit" [disabled]="!canSubmit">
+    Set timing plan
+  </button>
+
+  <div class="active-plan">
+    <h4>Active timing plan</h4>
+
+    @if (timingPlan) {
+      <dl class="active-plan-grid">
+        <div>
+          <dt>Intro start</dt>
+          <dd>{{ formatUtcToLocal(timingPlan.introStartAt) }}</dd>
+        </div>
+
+        <div>
+          <dt>Public start</dt>
+          <dd>{{ formatUtcToLocal(timingPlan.publicStartAt) }}</dd>
+        </div>
+
+        <div>
+          <dt>Auto start</dt>
+          <dd>{{ timingPlan.autoStartEnabled ? 'Enabled' : 'Disabled' }}</dd>
+        </div>
+      </dl>
+    } @else {
+      <p class="active-plan-empty">No active timing plan</p>
+    }
+  </div>
+</form>

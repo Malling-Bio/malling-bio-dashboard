@@ -1,0 +1,35 @@
+<div class="actions-panel">
+  <div class="actions-group">
+    <div class="group-title">Send event</div>
+
+    <label class="field">
+      <span class="field-label">Event</span>
+      <select [(ngModel)]="selectedEvent" [disabled]="busy">
+        @for (event of availableEvents; track event.value) {
+          <option [value]="event.value">{{ event.label }}</option>
+        }
+      </select>
+    </label>
+
+    <button type="button" (click)="onSendEvent()" [disabled]="busy">
+      Send event
+    </button>
+  </div>
+
+  <div class="actions-group">
+    <div class="group-title">Set supervisor state</div>
+
+    <label class="field">
+      <span class="field-label">State</span>
+      <select [(ngModel)]="selectedState" [disabled]="busy">
+        @for (state of availableStates; track state.value) {
+          <option [value]="state.value">{{ state.label }}</option>
+        }
+      </select>
+    </label>
+
+    <button type="button" (click)="onSetSupervisorState()" [disabled]="busy">
+      Set state
+    </button>
+  </div>
+</div>

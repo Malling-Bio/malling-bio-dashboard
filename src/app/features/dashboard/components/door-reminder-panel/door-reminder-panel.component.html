@@ -1,0 +1,26 @@
+<div class="door-reminder-panel">
+  <div class="field">
+    <div class="field-label">">    <div class="field-label">Door reminder offset</div>
+      {{ doorReminder.offsetSeconds === null ? '-' : (doorReminder.offsetSeconds + 's') }}
+    </div>
+  </div>
+
+  <div class="field" [class.soon]="isSoon()">
+    <div class="field-label">Door reminder countdown</div>
+    <div class="field-value countdown">
+      {{ formatSeconds(doorReminder.secondsUntil) }}
+    </div>
+  </div>
+
+  <div class="field full-width">
+    <div class="field-label">Door reminder status</div>
+    <div class="status-row">
+      <span
+        class="status-badge"
+        [class.triggered]="doorReminder.triggered"
+        [class.waiting]="!doorReminder.triggered">
+        {{ doorReminder.triggered ? 'Triggered' : 'Waiting' }}
+      </span>
+    </div>
+  </div>
+</div>
