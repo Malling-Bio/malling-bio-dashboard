@@ -2,7 +2,7 @@
   <header class="page-header">
     <div>
       <h1>Malling Bio Dashboard</h1>
-      <p>Første Angular-version med rigtige backend-data.</p>
+      <p>Overblik over sale, timing og show-flow.</p>
     </div>
   </header>
 
@@ -15,14 +15,45 @@
     (modeChange)="changeAppMode($event)">
   </app-app-mode-banner>
 
+  <section class="simulation-tools">
+    <button
+      type="button"
+      class="simulation-tools__header"
+      [attr.aria-expanded]="simulationToolsOpen()"
+      (click)="toggleSimulationTools()"
+    >
+      <span class="simulation-tools__title">Simulation Tools</span>
+
+      <span class="simulation-tools__state">
+      {{ simulationToolsOpen() ? 'Skjul' : 'Vis' }}
+        <span class="simulation-tools__icon">
+        {{ simulationToolsOpen() ? '▴' : '▾' }}
+      </span>
+    </span>
+    </button>
+
+    @if (simulationToolsOpen()) {
+      <div class="simulation-tools__content">
+        <p>
+          Brug disse input til at simulere de planlagte tider, som systemet i produktion
+          vil få fra salenes IMS3000-interface.
+        </p>
+        <p>
+          Det gør det muligt at demonstrere show-flowet uden forbindelse til det rigtige biografsystem.
+        </p>
+      </div>
+    }
+  </section>
+
   @if (!loading()) {
     <section class="screen-list">
       @for (screen of screens(); track screen.screenId) {
         <app-screen-card
           [screen]="screen"
+          [appMode]="appMode()"
           [busy]="busy()"
-          (sendEvent)="sendScreenEvent($event)"
-          (setSupervisorState)="setSupervisorState($event)"
+          [showSimulationTools]="simulationToolsOpen()"
+          (startShow)="startShow($event)"
           (setTimingPlan)="setTimingPlan($event)">
         </app-screen-card>
       }

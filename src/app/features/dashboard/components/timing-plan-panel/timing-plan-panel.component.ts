@@ -66,10 +66,6 @@ export class TimingPlanPanelComponent {
 
     return date.toISOString().replace(/\.\d{3}Z$/, 'Z');
   }
-
-  formatIso(value: string | null | undefined): string {
-    return value ?? '-';
-  }
   formatUtcToLocal(value: string | null | undefined): string {
     if (!value) {
       return 'No timing plan';

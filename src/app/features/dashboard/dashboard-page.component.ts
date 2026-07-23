@@ -1,12 +1,12 @@
-import { Component, OnDestroy, OnInit, inject, signal } from '@angular/core';
-import { interval, Subscription } from 'rxjs';
+import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
+import {interval, Subscription} from 'rxjs';
 
-import { OrchestratorApiService } from '../../core/api/orchestrator-api.service';
-import { AppMode } from '../../core/models/app-mode';
-import { ScreenView } from '../../core/models/screen-view';
-import { screenMapToList } from '../../shared/utils/screen-map.util';
-import { AppModeBannerComponent } from './components/app-mode-banner/app-mode-banner.component';
-import { ScreenCardComponent } from './components/screen-card/screen-card.component';
+import {OrchestratorApiService} from '../../core/api/orchestrator-api.service';
+import {AppMode} from '../../core/models/app-mode';
+import {ScreenView} from '../../core/models/screen-view';
+import {screenMapToList} from '../../shared/utils/screen-map.util';
+import {AppModeBannerComponent} from './components/app-mode-banner/app-mode-banner.component';
+import {ScreenCardComponent} from './components/screen-card/screen-card.component';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -24,6 +24,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
   readonly loading = signal<boolean>(false);
   readonly busy = signal<boolean>(false);
   readonly error = signal<string | null>(null);
+  readonly simulationToolsOpen = signal<boolean>(false);
 
   ngOnInit(): void {
     this.loadDashboard(true);
@@ -37,6 +38,10 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.pollingSub?.unsubscribe();
+  }
+
+  toggleSimulationTools(): void {
+    this.simulationToolsOpen.update(open => !open);
   }
 
   loadDashboard(showLoading: boolean): void {
@@ -102,35 +107,18 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  sendScreenEvent(payload: { screenId: string; event: string }): void {
+  startShow(screenId: string): void {
     this.busy.set(true);
     this.error.set(null);
 
-    this.api.sendScreenEvent(payload.screenId, payload.event).subscribe({
+    this.api.sendScreenEvent(screenId, 'MANUAL_START_REQUESTED').subscribe({
       next: () => {
         this.loadDashboard(false);
         this.busy.set(false);
       },
       error: (err) => {
-        console.error('Failed to send screen event', err);
-        this.error.set(`Kunne ikke sende event ${payload.event} til ${payload.screenId}`);
-        this.busy.set(false);
-      }
-    });
-  }
-
-  setSupervisorState(payload: { screenId: string; state: string }): void {
-    this.busy.set(true);
-    this.error.set(null);
-
-    this.api.setSupervisorState(payload.screenId, payload.state).subscribe({
-      next: () => {
-        this.loadDashboard(false);
-        this.busy.set(false);
-      },
-      error: (err) => {
-        console.error('Failed to set supervisor state', err);
-        this.error.set(`Kunde ikke sætte supervisor state ${payload.state} for ${payload.screenId}`);
+        console.error('Failed to start show', err);
+        this.error.set(`Kunne ikke starte show for ${screenId}`);
         this.busy.set(false);
       }
     });

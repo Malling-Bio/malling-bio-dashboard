@@ -17,3 +17,61 @@
     font-size: 22px;
   }
 }
+
+.screen-card__header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.screen-card__start-show {
+  display: flex;
+  align-items: center;
+}
+
+.screen-card__start-show-button {
+  padding: 0.55rem 0.9rem;
+  border: 1px solid #cfd7e6;
+  border-radius: 999px;
+  background: #1f2a44;
+  color: #ffffff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.screen-card__start-show-button:hover:not(:disabled) {
+  background: #162038;
+}
+
+.screen-card__start-show-button:disabled {
+  background: #eef2f7;
+  color: #94a3b8;
+  border-color: #dbe3ee;
+  cursor: not-allowed;
+}
+
+.screen-card__start-show-button--overdue:not(:disabled) {
+  background: #b42318;
+  border-color: #b42318;
+  color: #ffffff;
+}
+
+.screen-card__start-show-button--overdue:not(:disabled):hover {
+  background: #912018;
+}
+
+.screen-card__simulation-tools {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid #e5eaf1;
+}
+
+.screen-card__simulation-tools-label {
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #4b5563;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}

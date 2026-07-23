@@ -1,10 +1,15 @@
 <form class="timing-plan-panel" (ngSubmit)="onSubmit()">
   <div class="panel-header">
-    <h3>Timing plan</h3>
+    <h3>Simulated schedule input</h3>
     @if (busy) {
-      <span class="busy-indicator">Submitting…</span>
+      <span class="busy-indicator">Gemmer…</span>
     }
   </div>
+
+  <p class="panel-help">
+    Brug disse input til at simulere de planlagte tider, som systemet i produktion
+    vil få fra salens IMS3000-interface.
+  </p>
 
   <div class="field-grid">
     <label class="field">
@@ -39,11 +44,11 @@
   </div>
 
   <button type="submit" [disabled]="!canSubmit">
-    Set timing plan
+    Apply simulated timing
   </button>
 
   <div class="active-plan">
-    <h4>Active timing plan</h4>
+    <h4>Current timing plan</h4>
 
     @if (timingPlan) {
       <dl class="active-plan-grid">
@@ -63,7 +68,7 @@
         </div>
       </dl>
     } @else {
-      <p class="active-plan-empty">No active timing plan</p>
+      <p class="active-plan-empty">No timing plan set</p>
     }
   </div>
 </form>

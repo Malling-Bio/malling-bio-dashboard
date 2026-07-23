@@ -1,0 +1,141 @@
+<main class="landing-page">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Malling Bio</p>
+      <h1>Driftsoverblik</h1>
+      <p class="date-line">{{ todayLabel }}</p>
+    </div>
+
+    <div class="hero-status" [class]="overallStatusClass">
+      <span class="status-dot"></span>
+      <span>{{ overallStatusText }}</span>
+    </div>
+  </section>
+
+  <section class="summary-grid">
+    <article class="summary-card">
+      <span class="summary-label">Sidst opdateret</span>
+      <strong>{{ lastUpdatedLabel }}</strong>
+    </article>
+
+    <article class="summary-card">
+      <span class="summary-label">Looptime</span>
+      <strong>{{ looptimeMinutes }} minutter</strong>
+      <span class="summary-note">Gælder for alle sale og forestillinger</span>
+    </article>
+
+    <article class="summary-card">
+      <span class="summary-label">Online sale</span>
+      <strong>{{ onlineScreenCount }} / {{ screens.length }}</strong>
+    </article>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <div>
+        <h2>Salstatus</h2>
+        <p>Oversigt over om salserverne kan nås.</p>
+      </div>
+    </div>
+
+    <div class="screen-grid">
+      @for (screen of screens; track screen.screenName) {
+        <article class="screen-card">
+          <div class="screen-card-header">
+            <h3>{{ screen.screenName }}</h3>
+
+            <span class="status-pill" [class]="screenStatusClass(screen)">
+              <span class="status-dot"></span>
+              {{ screenStatusText(screen) }}
+            </span>
+          </div>
+
+          <dl class="status-list">
+            <div>
+              <dt>IMS</dt>
+              <dd>{{ screen.imsStatusText }}</dd>
+            </div>
+
+            <div>
+              <dt>Schedule</dt>
+              <dd>{{ screen.scheduleStatusText }}</dd>
+            </div>
+          </dl>
+
+          @if (screen.availability === 'offline') {
+            <p class="help-text">
+              Det er normalt, hvis salen endnu ikke er tændt. Tænd salen og vent et par minutter.
+            </p>
+          }
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <div>
+        <h2>Dagens program</h2>
+        <p>Forestillinger fra dagens schedules på salserverne.</p>
+      </div>
+    </div>
+
+    <div class="program-grid">
+      @for (screen of screens; track screen.screenName) {
+        <article class="program-card">
+          <h3>{{ screen.screenName }}</h3>
+
+          @if (screen.scheduledShows === null) {
+            <p class="empty-state">Ikke tilgængeligt</p>
+          } @else if (screen.scheduledShows.length === 0) {
+            <p class="empty-state">Ingen forestillinger planlagt</p>
+          } @else {
+            <ul class="show-list">
+              @for (show of screen.scheduledShows; track show.startTime + show.title) {
+                <li>
+                  <time>{{ show.startTime }}</time>
+                  <span>{{ show.title }}</span>
+                </li>
+              }
+            </ul>
+          }
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <div>
+        <h2>Klargøring</h2>
+        <p>Planlagte checks der senere kan hjælpe medarbejderen med at sikre, at alt er klar.</p>
+      </div>
+    </div>
+
+    <div class="preparation-grid">
+      <article class="preparation-card disabled">
+        <h3>Ready to run check</h3>
+        <p>Verificerer licenser og showfiler for dagens forestillinger.</p>
+        <span>Kommer senere</span>
+      </article>
+
+      <article class="preparation-card disabled">
+        <h3>Klar til shows</h3>
+        <p>Kontrollerer at lys, lyd og projektor kan betjenes som ønsket.</p>
+        <span>Kommer senere</span>
+      </article>
+
+      <article class="preparation-card disabled">
+        <h3>Opret schedules</h3>
+        <p>Opretter fremtidige schedules ud fra planlagte forestillinger.</p>
+        <span>Kommer senere</span>
+      </article>
+    </div>
+  </section>
+
+  <section class="actions">
+    <a routerLink="/operations" class="primary-action">
+      Gå til afvikling af dagens program
+    </a>
+  </section>
+</main>
