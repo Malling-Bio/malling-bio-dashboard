@@ -1,59 +1,48 @@
-# MallingBioDashboard
+# Malling Bio Dashboard
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.3.
+Frontend dashboard for monitoring and controlling cinema screen state at Malling Bio.
 
-## Development server
+## Overview
 
-To start a local development server, run:
+The dashboard provides a simple operator interface for supervising a cinema screen during a show.
 
-```bash
-ng serve
-```
+It is designed for:
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- viewing current screen state
+- following show progression (intro, ads, trailers, feature, ending)
+- displaying timing and countdown information
+- supporting manual control during demos or development
 
-## Code scaffolding
+The UI is intentionally kept simple and readable for non-technical users.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
 
-```bash
-ng generate component component-name
-```
+## Related Project
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Backend service:
 
-```bash
-ng generate --help
-```
+- https://github.com/malling-bio/malling-bio-ims
 
-## Building
+---
 
-To build the project run:
+## Features
 
-```bash
-ng build
-```
+- Real-time view of screen state
+- Timing plan visualization
+- Countdown indicators (demo-based)
+- Manual control mode (for simulation and demos)
+- Automatic mode (backend-driven flow)
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
+## Development Setup
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+### Prerequisites
 
-```bash
-ng test
-```
+- Node.js
+- npm
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+### Install dependencies
 
 ```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+npm install
